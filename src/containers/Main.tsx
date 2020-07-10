@@ -2,38 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useFetchPokemon } from '../hooks/useFetchPokemon';
 import ToolBar from '../components/ToolBar';
 import List from '../components/List';
-import { Filter } from '../types';
-
-const filters: Filter[] = [
-  {
-    name: 'all',
-    link: '/pokemon/?limit=150',
-  },
-  {
-    name: 'normal',
-    link: '/type/1/?limit=150',
-  },
-  {
-    name: 'fighting',
-    link: '/type/2/?limit=150',
-  },
-  {
-    name: 'flying',
-    link: '/type/3/?limit=150',
-  },
-  {
-    name: 'poison',
-    link: '/type/4/?limit=150',
-  },
-  {
-    name: 'ground',
-    link: '/type/5/?limit=150',
-  },
-  {
-    name: 'rock',
-    link: '/type/6/?limit=150',
-  },
-];
+import { filters } from '../constants';
 
 const Main: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState([filters[0]]);

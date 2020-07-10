@@ -27,11 +27,12 @@ const SFilterDropdown = styled.div`
 `;
 
 const StyledDropdown = styled.div`
-  overflow: hidden;
+  overflow: scroll;
   position: absolute;
   top: 115%;
   left: 0;
   right: 0;
+  max-height: 200px;
   border-radius: 7px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   background-color: ${({ theme }) => theme.light};

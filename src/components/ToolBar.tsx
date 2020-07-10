@@ -17,7 +17,7 @@ const ToolBar: React.FC<FilterProps> = ({
   toggleFilter,
 }) => {
   return (
-    <StyledToolBar className='container-fluid m-0 px-5 d-flex justify-content-start align-items-center shadow-lg rounded'>
+    <StyledToolBar className='m-0 px-5 d-flex justify-content-start align-items-center shadow-lg rounded flex-shrink-0'>
       <FilterDropdown
         filters={filters}
         selectedFilters={selectedFilters}
