@@ -1,12 +1,7 @@
 import React from 'react';
-import { Filter } from '../types';
+import { FilterMinProps } from '../types';
 import styled from 'styled-components';
 import { ReactComponent as Close } from '../assets/close.svg';
-
-type FilterMinProps = {
-  filter: Filter;
-  onDelete: () => void;
-};
 
 const StyledFilterMin = styled.div`
   height: 30px;

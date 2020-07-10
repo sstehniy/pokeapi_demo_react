@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Filter, Pokemon } from '../types';
-
-type HookReturnType = {
-  data: Pokemon[] | any[];
-  loading: boolean;
-  error: boolean;
-};
+import { Filter, Pokemon, HookReturnType } from '../types';
 
 const fetchDataFromResource = async (url: string) => {
   const rawData = await fetch(url);
   const formattedData = await rawData.json();
   return formattedData;
 };
-
+/*A custom hook to fetch pokemons depending on filters Array that is
+passed in as argument.
+*/
 export const useFetchPokemon = (filtersArray: Filter[]): HookReturnType => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>([]);
@@ -25,12 +21,13 @@ export const useFetchPokemon = (filtersArray: Filter[]): HookReturnType => {
     const fetchData = async () => {
       setLoading(true);
       let pokemons: Pokemon[] = [];
-
+      //Fetch pokemons urls for each filter that has link to certain type
       for (const filter of filtersArray) {
         try {
           const allPokemons: any = await fetchDataFromResource(
             `${baseUrl}${filter.link}`
           );
+          // For each url fetch the full pokemon object and put it into resulting array
           if (filter.name === 'all') {
             for (const pokemon of allPokemons.results) {
               const data: any = await fetchDataFromResource(pokemon.url);
@@ -50,13 +47,14 @@ export const useFetchPokemon = (filtersArray: Filter[]): HookReturnType => {
           setData([]);
         }
       }
-
+      //Format the final array to contain certain infos
       let dataToState: Pokemon[] = pokemons.map((p: any) => ({
         name: p.name,
         order: p.order,
         photo: p.sprites.front_default,
         types: p.types.map((t: any) => t.type.name),
       }));
+      //Find the intersection of pokemons depending on the chosen filters
       if (filtersArray[0].name !== 'all') {
         for (const pokemon of dataToState) {
           for (const filter of filtersArray) {
@@ -69,11 +67,13 @@ export const useFetchPokemon = (filtersArray: Filter[]): HookReturnType => {
           else return [...acc, curr];
         }, new Array());
       }
-      setData(dataToState);
+      setData(dataToState.filter((_, i) => i < 150));
       setLoading(false);
     };
     fetchData();
-  }, [filtersArray]);
-
+    //Each time filters change the effect is called to return new array of objects
+  }, [filtersArray, baseUrl]);
+  /*Hook returns data, loading status to display placeholders while processing request 
+  and an error flag if an error occured while fetching the data*/
   return { data, loading, error };
 };

@@ -46,6 +46,7 @@ const FilterDropdown: React.FC<FilterProps> = ({
   const [expendDropdown, setExpendDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(document.createElement('div'));
 
+  // An effect to track clicks outside the dropdown container and close it if clicked outside
   useEffect(() => {
     const hideDropdown = () => {
       setExpendDropdown(false);
@@ -60,7 +61,7 @@ const FilterDropdown: React.FC<FilterProps> = ({
   };
 
   const toggleDropdownHandler = () => {
-    setExpendDropdown((prev) => !prev);
+    setExpendDropdown(!expendDropdown);
   };
 
   return (

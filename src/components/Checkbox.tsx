@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-type CheckboxProps = {
-  selected: boolean;
-  showPreChecked: boolean;
-};
+import { CheckboxProps } from '../types';
 
 const StyledCheckbox = styled.div`
   position: relative;

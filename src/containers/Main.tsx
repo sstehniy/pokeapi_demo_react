@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFetchPokemon } from '../hooks/useFetchPokemon';
 import ToolBar from '../components/ToolBar';
 import List from '../components/List';
@@ -7,12 +7,6 @@ import { filters } from '../constants';
 const Main: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState([filters[0]]);
   const { data, loading, error } = useFetchPokemon(selectedFilters);
-  const [itemsToRender, setItemsToRender] = useState(data);
-
-  useEffect(() => {
-    if (!data) return;
-    setItemsToRender(data.filter((_, i) => i < 150));
-  }, [data]);
 
   const toggleFilterHandler = (name: string) => {
     const selectedFilter = filters.find((f) => f.name === name) || filters[0];
@@ -24,10 +18,12 @@ const Main: React.FC = () => {
       }
     }
     if (selectedFilters.find((f) => f.name === selectedFilter.name)) {
+      //Set the default filter if any are selected
       if (selectedFilters.length === 1) setSelectedFilters([filters[0]]);
       setSelectedFilters((prev) =>
         prev.filter((f) => f.name !== selectedFilter.name)
       );
+      //If any filter except for default is selected, add it to the filters array and unckeck the default filter
     } else
       setSelectedFilters((prev) => [
         ...prev.filter((f) => f.name !== 'all'),
@@ -44,7 +40,7 @@ const Main: React.FC = () => {
         selectedFilters={selectedFilters}
         toggleFilter={toggleFilterHandler}
       />
-      <List items={itemsToRender} loading={loading} error={error} />
+      <List items={data} loading={loading} error={error} />
     </div>
   );
 };

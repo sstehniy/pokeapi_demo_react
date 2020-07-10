@@ -27,3 +27,24 @@ export type ListProps = {
   loading: boolean;
   error: boolean;
 };
+
+export type HookReturnType = {
+  data: Pokemon[] | any[];
+  loading: boolean;
+  error: boolean;
+};
+
+export type FilterManageProps = {
+  filters: Filter[];
+  removeFilter: (name: string) => void;
+};
+
+export type FilterMinProps = {
+  filter: Filter;
+  onDelete: () => void;
+};
+
+export type CheckboxProps = {
+  selected: boolean;
+  showPreChecked: boolean;
+};
