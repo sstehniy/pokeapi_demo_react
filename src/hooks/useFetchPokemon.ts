@@ -35,7 +35,6 @@ export const useFetchPokemon = (filtersArray: Filter[]): HookReturnType => {
             }
           } else {
             for (const pokemon of allPokemons.pokemon) {
-              console.log(pokemon);
               const data: any = await fetchDataFromResource(
                 pokemon.pokemon.url
               );
