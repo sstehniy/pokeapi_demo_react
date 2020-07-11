@@ -61,10 +61,10 @@ export const useFetchPokemon = (filtersArray: Filter[]): HookReturnType => {
               dataToState = dataToState.filter((d) => d.name !== pokemon.name);
           }
         }
-        dataToState = dataToState.reduce((acc, curr) => {
+        dataToState = dataToState.reduce((acc: Pokemon[], curr) => {
           if (acc.find((p) => p.name === curr.name)) return acc;
           else return [...acc, curr];
-        }, new Array());
+        }, []);
       }
       setData(dataToState.filter((_, i) => i < 150));
       setLoading(false);

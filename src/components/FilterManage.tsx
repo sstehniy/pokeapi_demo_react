@@ -1,16 +1,19 @@
-import React from 'react';
-import { FilterManageProps } from '../types';
+import React, { useContext } from 'react';
+import { Context } from '../context';
+import { Filter } from '../types';
 import FilterMin from './FilterMin';
 
-const FilterManage: React.FC<FilterManageProps> = ({
-  filters,
-  removeFilter,
-}) => {
+const FilterManage: React.FC = () => {
+  const { selectedFilters, toggleFilterHandler } = useContext(Context);
   return (
     <div className='d-flex align-items-center'>
-      {filters.map((f, i) =>
+      {(selectedFilters as Filter[]).map((f, i) =>
         f.name === 'all' ? null : (
-          <FilterMin key={i} filter={f} onDelete={() => removeFilter(f.name)} />
+          <FilterMin
+            key={i}
+            filter={f}
+            onDelete={() => toggleFilterHandler(f.name)}
+          />
         )
       )}
     </div>

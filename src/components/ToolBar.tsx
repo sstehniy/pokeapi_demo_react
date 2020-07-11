@@ -1,7 +1,6 @@
 import React from 'react';
 import FilterDropdown from './FilterDropdown';
 import ResetButton from './ResetButton';
-import { FilterProps } from '../types';
 import styled from 'styled-components';
 import FilterManage from './FilterManage';
 import { useMediaQuery } from '../hooks/useMediaQuery';
@@ -12,23 +11,13 @@ const StyledToolBar = styled.div`
   width: 100%;
 `;
 
-const ToolBar: React.FC<FilterProps> = ({
-  filters,
-  selectedFilters,
-  toggleFilter,
-}) => {
+const ToolBar: React.FC = () => {
   const isSmall = useMediaQuery('(max-width: 600px)');
   return (
     <StyledToolBar className='m-0 px-5 d-flex justify-content-start align-items-center shadow-lg rounded flex-shrink-0 overflow-scroll'>
-      <FilterDropdown
-        filters={filters}
-        selectedFilters={selectedFilters}
-        toggleFilter={toggleFilter}
-      />
-      <ResetButton onClick={() => toggleFilter('all')} />
-      {!isSmall && (
-        <FilterManage filters={selectedFilters} removeFilter={toggleFilter} />
-      )}
+      <FilterDropdown />
+      <ResetButton />
+      {!isSmall && <FilterManage />}
     </StyledToolBar>
   );
 };

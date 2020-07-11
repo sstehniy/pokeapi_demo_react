@@ -10,11 +10,11 @@ export type Pokemon = {
   types: string[];
 };
 
-export type FilterProps = {
-  filters: Filter[];
-  selectedFilters: Filter[] | [];
-  toggleFilter: (name: string) => void;
-};
+// export type FilterProps = {
+//   filters: Filter[];
+//   selectedFilters: Filter[] | [];
+//   toggleFilter: (name: string) => void;
+// };
 
 export type DropdownItemProps = {
   name: string;
@@ -47,4 +47,10 @@ export type FilterMinProps = {
 export type CheckboxProps = {
   selected: boolean;
   showPreChecked: boolean;
+};
+
+export type Context = {
+  filters: Filter[];
+  selectedFilters: Filter[] | [];
+  toggleFilterHandler: (name: string) => void;
 };

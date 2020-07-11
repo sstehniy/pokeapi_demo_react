@@ -1,7 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from 'react';
 import DropdownItem from './DropdownItem';
 import { ReactComponent as Arrow } from '../assets/down-arrow.svg';
-import { FilterProps } from '../types';
+import { Context } from '../context';
 import styled from 'styled-components';
 
 const SFilterDropdown = styled.div`
@@ -38,31 +44,24 @@ const StyledDropdown = styled.div`
   background-color: ${({ theme }) => theme.light};
 `;
 
-const FilterDropdown: React.FC<FilterProps> = ({
-  filters,
-  selectedFilters,
-  toggleFilter,
-}) => {
+const FilterDropdown: React.FC = () => {
   const [expendDropdown, setExpendDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(document.createElement('div'));
+  const { filters, selectedFilters, toggleFilterHandler } = useContext(Context);
 
   // An effect to track clicks outside the dropdown container and close it if clicked outside
   useEffect(() => {
+    const dropdownRefNode = dropdownRef.current;
     const hideDropdown = () => {
       setExpendDropdown(false);
     };
-    dropdownRef.current.addEventListener('focusout', hideDropdown);
-    return () =>
-      dropdownRef.current.removeEventListener('focusout', hideDropdown);
+    dropdownRefNode.addEventListener('focusout', hideDropdown);
+    return () => dropdownRefNode.removeEventListener('focusout', hideDropdown);
   }, []);
 
-  const selectFilterHandler = (name: string) => {
-    toggleFilter(name);
-  };
-
-  const toggleDropdownHandler = () => {
-    setExpendDropdown(!expendDropdown);
-  };
+  const toggleDropdownHandler = useCallback(() => {
+    setExpendDropdown((prev) => !prev);
+  }, []);
 
   return (
     <SFilterDropdown
@@ -85,7 +84,7 @@ const FilterDropdown: React.FC<FilterProps> = ({
               selected={
                 !!selectedFilters.find((selected) => selected.name === f.name)
               }
-              onSelected={selectFilterHandler}
+              onSelected={() => toggleFilterHandler(f.name)}
             />
           ))}
         </StyledDropdown>

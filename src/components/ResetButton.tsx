@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Context } from '../context';
 
 const StyledResetButton = styled.div`
   width: 170px;
@@ -24,15 +25,13 @@ const StyledResetButton = styled.div`
 
 const ButtonText = styled.p``;
 
-type ResetButton = {
-  onClick: () => void;
-};
+const ResetButton: React.FC = () => {
+  const { toggleFilterHandler } = useContext(Context);
 
-const ResetButton: React.FC<ResetButton> = ({ onClick }) => {
   return (
     <StyledResetButton
       className='d-flex justify-content-center align-items-center'
-      onClick={onClick}>
+      onClick={() => toggleFilterHandler('all')}>
       <ButtonText className='m-0'>Reset</ButtonText>
     </StyledResetButton>
   );
