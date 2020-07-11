@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const StyledSkeletonItem = styled.div`
+  border-radius: 10px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
+`;
+
 const SkeletonLine = styled.div`
   position: absolute;
   left: 0;
@@ -55,8 +60,8 @@ const TextSkeleton = styled.div`
 
 const SkeletonItem = () => {
   return (
-    <div
-      className='card m-3 shadow-md rounded d-flex flex-column align-items-center'
+    <StyledSkeletonItem
+      className='card m-3 d-flex flex-column align-items-center'
       style={{ height: '300px', width: '225px' }}>
       <ImageSkeleton>
         <SkeletonLine />
@@ -75,7 +80,7 @@ const SkeletonItem = () => {
           <SkeletonLine />
         </TextSkeleton>
       </div>
-    </div>
+    </StyledSkeletonItem>
   );
 };
 
