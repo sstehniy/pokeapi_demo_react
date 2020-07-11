@@ -66,7 +66,7 @@ const FilterDropdown: React.FC<FilterProps> = ({
 
   return (
     <SFilterDropdown
-      className='position-relative d-flex align-items-center justify-content-center flex-shrink-0'
+      className='position-relative d-flex align-items-center justify-content-center'
       tabIndex={1}
       ref={dropdownRef}>
       <p className='m-0' onClick={toggleDropdownHandler}>

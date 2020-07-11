@@ -31,7 +31,7 @@ type ResetButton = {
 const ResetButton: React.FC<ResetButton> = ({ onClick }) => {
   return (
     <StyledResetButton
-      className='d-flex justify-content-center align-items-center flex-shrink-0'
+      className='d-flex justify-content-center align-items-center'
       onClick={onClick}>
       <ButtonText className='m-0'>Reset</ButtonText>
     </StyledResetButton>
