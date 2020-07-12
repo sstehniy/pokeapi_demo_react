@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useFetchPokemon } from '../hooks/useFetchPokemon';
+import { useFetchPokemon } from '../hooks/useFetchPokemons';
 import ToolBar from '../components/ToolBar';
 import List from '../components/List';
+import { FullItemModal } from './FullItemModal';
 import { filters } from '../constants';
 import { Context } from '../context';
+import { Route } from 'react-router-dom';
 
 const Main: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState([filters[0]]);
@@ -40,10 +42,15 @@ const Main: React.FC = () => {
         toggleFilterHandler,
       }}>
       <div
-        className='main container-fluid flex-grow-1 d-flex flex-column align-items-center align-items-start'
-        style={{ padding: '25px 20px', marginTop: '66px' }}>
+        className='position-relative container-fluid flex-grow-1 d-flex flex-column align-items-center align-items-start'
+        style={{
+          padding: '25px 20px',
+          marginTop: '66px',
+          height: 'calc(100vh - 66px)',
+        }}>
         <ToolBar />
         <List items={data} loading={loading} error={error} />
+        <Route exact path='/:pokemonName' component={FullItemModal} />
       </div>
     </Context.Provider>
   );

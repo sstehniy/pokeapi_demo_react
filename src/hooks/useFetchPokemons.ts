@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Filter, Pokemon, HookReturnType } from '../types';
+import { Filter, PokemonMin as Pokemon, HookReturnType } from '../types';
 
 const fetchDataFromResource = async (url: string) => {
   const rawData = await fetch(url);

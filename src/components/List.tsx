@@ -1,13 +1,19 @@
 import React from 'react';
 import ListItem from './ListItem';
 import LoadingItemSkeleton from './SkeletonItem';
-import { ListProps, Pokemon } from '../types';
+import { ListProps, PokemonMin } from '../types';
 import styled from 'styled-components';
 
 const StyledListWrapper = styled.div`
   background-color: ${({ theme }) => theme.blue};
   width: 100%;
+  justify-self: stretch;
+  overflow-y: scroll;
+
   & h5#total-count {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     margin: 0;
     padding: 5px 10px;
     display: inline-block;
@@ -33,7 +39,7 @@ const StyledList = styled.ul`
 
 const List: React.FC<ListProps> = ({ items, loading = false, error }) => {
   return (
-    <StyledListWrapper className='position-relative flex-grow-1 mt-3 p-4 shadow-lg rounded '>
+    <StyledListWrapper className='position-relative mt-3 p-4 rounded shadow-lg'>
       {!loading && (
         <h5 id='total-count'>
           Total count: <span>{items.length}</span>
@@ -45,7 +51,7 @@ const List: React.FC<ListProps> = ({ items, loading = false, error }) => {
             <LoadingItemSkeleton key={i} />
           ))
         ) : items.length ? (
-          (items as Pokemon[]).map((item, index) => (
+          (items as PokemonMin[]).map((item, index) => (
             <ListItem key={index} item={item} />
           ))
         ) : (

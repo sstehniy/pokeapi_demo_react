@@ -1,20 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Pokemon } from '../types';
+import { PokemonMin } from '../types';
+import { Link } from 'react-router-dom';
 import photoAlt from '../assets/pokeball_ph.svg';
 
 const StyledListItem = styled.div`
+  height: 300px;
+  width: 225px;
   border-radius: 10px;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
+
+  & a#more-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    background-color: ${({ theme }) => theme.blue};
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: ${({ theme }) => theme.dark} !important;
+    text-decoration: none !important;
+    &:hover {
+    }
+  }
 `;
 
-const ListItem: React.FC<{ item: Pokemon }> = ({
+const ListItem: React.FC<{ item: PokemonMin }> = ({
   item: { name, order, photo, types },
 }) => {
   return (
-    <StyledListItem
-      className='card position-relative m-3 '
-      style={{ height: '300px', width: '225px' }}>
+    <StyledListItem className='card position-relative m-3'>
       {photo ? (
         <img
           className='carg-img-top'
@@ -37,6 +52,9 @@ const ListItem: React.FC<{ item: Pokemon }> = ({
         <p className='card-text my-2'>Order: {order}</p>
         <p className='card-text my-2'>Types: {types.join(', ')}</p>
       </div>
+      <Link to={`/${name}`} id='more-btn'>
+        MORE
+      </Link>
     </StyledListItem>
   );
 };

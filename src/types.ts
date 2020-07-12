@@ -3,18 +3,21 @@ export type Filter = {
   link: string;
 };
 
-export type Pokemon = {
+export type PokemonMin = {
   name: string;
   order: number;
   photo: string;
   types: string[];
 };
 
-// export type FilterProps = {
-//   filters: Filter[];
-//   selectedFilters: Filter[] | [];
-//   toggleFilter: (name: string) => void;
-// };
+export type PokemonFull = {
+  name: string;
+  order: number;
+  photos: null | string | string[];
+  types: string[];
+  abilities: string[];
+  moves: string[];
+};
 
 export type DropdownItemProps = {
   name: string;
@@ -23,13 +26,13 @@ export type DropdownItemProps = {
 };
 
 export type ListProps = {
-  items: Pokemon[] | [];
+  items: PokemonMin[] | [];
   loading: boolean;
   error: boolean;
 };
 
 export type HookReturnType = {
-  data: Pokemon[] | any[];
+  data: PokemonMin[] | any[];
   loading: boolean;
   error: boolean;
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 
@@ -12,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   width: 100vw;
   font-family: 'Roboto', sans-serif;
@@ -40,11 +42,11 @@ p {
 `;
 
 ReactDOM.render(
-  <>
+  <Router>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </>,
+  </Router>,
   document.getElementById('root')
 );
