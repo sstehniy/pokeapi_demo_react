@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Prev } from '../assets/previous.svg';
 import { ReactComponent as Next } from '../assets/next.svg';
@@ -82,7 +82,6 @@ const Caroussel: React.FC<{ photos: null | string | string[] }> = ({
   photos,
 }) => {
   const [offset, setOffset] = useState(0);
-  // const sliderRef = useRef(document.createElement('div'));
 
   const handlePrevClick = () => {
     console.log('yeee');

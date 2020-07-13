@@ -19,6 +19,16 @@ const StyledFullItemModal = styled.div`
   align-items: stretch;
   position: relative;
   box-shadow: 0 0 7px #247ba0;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    min-width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+    border-radius: 0;
+  }
 `;
 
 const PhotoBlock = styled.div`
