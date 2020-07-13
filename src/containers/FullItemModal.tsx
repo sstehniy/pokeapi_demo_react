@@ -22,8 +22,8 @@ const StyledFullItemModal = styled.div`
 
   @media (max-width: 600px) {
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    /* height: 100vh;
+    width: 100vw; */
     min-width: 100vw;
     min-height: 100vh;
     align-items: center;
