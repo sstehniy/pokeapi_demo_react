@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Prev } from '../assets/previous.svg';
 import { ReactComponent as Next } from '../assets/next.svg';
+import placeholder from '../assets/pokeball_ph.svg';
 
 const StyledCarousselWrapper = styled.div`
   width: 100%;
@@ -128,7 +129,12 @@ const Caroussel: React.FC<{ photos: null | string | string[] }> = ({
       </StyledCaroussel>
     </StyledCarousselWrapper>
   ) : (
-    <p>Placeholder</p>
+    <img
+      className='position-absolute'
+      src={placeholder}
+      alt='caroussel-placeholder'
+      style={{ width: '125px', left: '50%', transform: 'translateX(-50%)' }}
+    />
   );
 };
 

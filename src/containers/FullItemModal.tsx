@@ -32,6 +32,7 @@ const StyledFullItemModal = styled.div`
 `;
 
 const PhotoBlock = styled.div`
+  position: relative;
   min-width: 200px;
   flex: 0.4;
 `;
