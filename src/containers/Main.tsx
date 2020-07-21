@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useFetchPokemon } from '../hooks/useFetchPokemons';
 import ToolBar from '../components/ToolBar';
 import List from '../components/List';
@@ -6,10 +6,11 @@ import { FullItemModal } from './FullItemModal';
 import { filters } from '../constants';
 import { Context } from '../context';
 import { Route } from 'react-router-dom';
+import { PokemonMin } from '../types';
 
 const Main: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState([filters[0]]);
-  const { data, loading, error } = useFetchPokemon(selectedFilters);
+  const { data, loading, error } = useFetchPokemon();
 
   const toggleFilterHandler = (name: string) => {
     const selectedFilter = filters.find((f) => f.name === name) || filters[0];
@@ -34,6 +35,23 @@ const Main: React.FC = () => {
       ]);
   };
 
+  const filteredData = useMemo(() => {
+    let filteredList: PokemonMin[] = [...data];
+    if (selectedFilters[0].name !== 'all') {
+      for (const pokemon of filteredList) {
+        for (const filter of selectedFilters) {
+          if (!pokemon.types.find((t) => t === filter.name))
+            filteredList = filteredList.filter((d) => d.name !== pokemon.name);
+        }
+      }
+      filteredList = filteredList.reduce((acc: PokemonMin[], curr) => {
+        if (acc.find((p) => p.name === curr.name)) return acc;
+        else return [...acc, curr];
+      }, []);
+    }
+    return filteredList;
+  }, [selectedFilters, data]);
+
   return (
     <Context.Provider
       value={{
@@ -49,7 +67,7 @@ const Main: React.FC = () => {
           height: 'calc(100vh - 66px)',
         }}>
         <ToolBar />
-        <List items={data} loading={loading} error={error} />
+        <List items={filteredData} loading={loading} error={error} />
         <Route exact path='/:pokemonName' component={FullItemModal} />
       </div>
     </Context.Provider>

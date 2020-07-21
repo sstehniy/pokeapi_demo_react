@@ -8,6 +8,8 @@ const StyledListWrapper = styled.div`
   background-color: ${({ theme }) => theme.blue};
   width: 100%;
   justify-self: stretch;
+  min-height: 75vh;
+  max-height: 1000px;
   overflow-y: scroll;
 
   & h5#total-count {
